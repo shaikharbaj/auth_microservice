@@ -16,4 +16,17 @@ export class AuthService {
             throw new RpcException(error);
           }
     }
+
+    async adminRegister(payload:any){
+            try {
+               //check admin_is already present or not.........
+               const checkisAdminPresent = await lastValueFrom(this.userClient.send({role:"CHECK-USER_EXIST",cmd:"check-user-exist"},{data:{email:payload.email,role:'admin'}}))
+
+              if(!checkisAdminPresent){
+                   throw new RpcException('user with this email is already exist.');
+              }
+            } catch (error) {
+                 throw new RpcException(error);
+            }
+    }
 }

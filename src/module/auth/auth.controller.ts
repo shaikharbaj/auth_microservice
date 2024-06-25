@@ -21,4 +21,9 @@ export class AuthController {
     console.log(id);
     return await this.authservice.adminLogin(data);
   }
+
+  @MessagePattern({ role: 'RegisterAdmin', cmd: 'admin-register' })
+  async create_Admin(@Data() data: any) {
+    return await this.authservice.adminRegister(data);;
+  }
 }
